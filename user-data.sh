@@ -20,10 +20,22 @@ sudo yum install java-1.8.0-openjdk-devel -y
 sudo yum install git -y
 # assuming maven
 sudo yum install maven -y
-# jenkins
-sudo yum install jenkins -y
+# we will need wget
+sudo yum install wget -y
 # patch the server
 sudo yum upgrade -y
+
+# we need to get the repo
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
+# get a key for the repo
+sudo rpm --import http://pkg.jenkins.io/redhat/jenkins.io.key
+# finally, install
+sudo yum install jenkins -y
+
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+
+
 
 # start jenkins
 sudo service jenkins start
