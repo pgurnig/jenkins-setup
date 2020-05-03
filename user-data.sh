@@ -20,8 +20,13 @@ sudo yum install java-1.8.0-openjdk-devel -y
 sudo yum install git -y
 # assuming maven
 sudo yum install maven -y
+# jenkins
+sudo yum install jenkins -y
 # patch the server
 sudo yum upgrade -y
+
+# start jenkins
+sudo service jenkins start
 
 
 change the prompt
