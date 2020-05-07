@@ -25,15 +25,10 @@ sudo yum install wget -y
 # patch the server
 sudo yum upgrade -y
 
-# we need to get the repo
-sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
-# get a key for the repo
-sudo rpm --import http://pkg.jenkins.io/redhat/jenkins.io.key
-# finally, install
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key
 sudo yum install jenkins -y
-
-sudo systemctl start jenkins
-sudo systemctl enable jenkins
+sudo service jenkins start
 
 
 
