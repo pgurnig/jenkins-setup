@@ -30,10 +30,7 @@ sudo rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key
 sudo yum install jenkins -y
 sudo service jenkins start
 
-
-
-# start jenkins
-sudo service jenkins start
+sudo yum install yum-cron -y
 
 
 change the prompt
