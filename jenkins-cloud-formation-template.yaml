@@ -1,6 +1,11 @@
+# Jenkins Cloud Formation To Do
+# x 1. Create tags
+# 2. Create name with GUID or portion of instance id
+# x 3. Termination Protection
+
 AWSTemplateFormatVersion: 2010-09-09
 Metadata:
-  'AWS: :CloudFormation: :Designer':
+  'AWS::CloudFormation::Designer':
     bc1b7f29-9c3b-4ee9-9bc0-f69df7341413:
       size:
         width: 60
@@ -12,14 +17,19 @@ Metadata:
       embeds: []
 Resources:
   JenkinsServer:
-    Type: 'AWS: :EC2: :Instance'
+    Type: 'AWS::EC2::Instance'
     Properties:
       Tags:
         - Key: DIME
           Value: '22476'
+        - Key: DIME Link
+          Value: 'https://equityresidential.quickbase.com/db/bb4qdnypp?a=dr&r=x8n&rl=st'
+        - Key: Project
+          Value: 'Jenkins POC'
       ImageId: ami-0f7919c33c90f5b58
       InstanceType: t2.micro
       KeyName: eqr-ohio
+      DisableApiTermination: 'true'
       NetworkInterfaces:
         - AssociatePublicIpAddress: 'true'
           DeviceIndex: '0'
@@ -28,7 +38,7 @@ Resources:
           GroupSet:
             - sg-0a391ec88b5acd095
       UserData: !Base64 
-        'Fn: :Join':
+        'Fn::Join':
           - ''
           - - |
               #!/bin/bash -xe
@@ -54,10 +64,10 @@ Resources:
               sudo yum install maven -y
             - >
               sudo wget -O /etc/yum.repos.d/jenkins.repo
-              http: //pkg.jenkins.io/redhat-stable/jenkins.repo
+              http://pkg.jenkins.io/redhat-stable/jenkins.repo
             - >
               sudo rpm --import
-              http: //pkg.jenkins.io/redhat-stable/jenkins.io.key
+              http://pkg.jenkins.io/redhat-stable/jenkins.io.key
             - |
               sudo yum install jenkins -y
             - |
@@ -65,5 +75,5 @@ Resources:
             - |
               sudo service jenkins start
     Metadata:
-      'AWS: :CloudFormation: :Designer':
+      'AWS::CloudFormation::Designer':
         id: bc1b7f29-9c3b-4ee9-9bc0-f69df7341413
