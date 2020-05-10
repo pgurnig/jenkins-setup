@@ -20,3 +20,7 @@ sudo vi /etc/yum/yum-cron.conf
 
 # check the cron log
 sudo cat /var/log/yum.log
+
+# curl userdata
+curl http://169.254.169.254/latest/user-data
+
